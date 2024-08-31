@@ -339,22 +339,22 @@
           
           // Add header
           doc.setFontSize(8);
-          doc.setTextColor(0, 102, 204); // Blue color for header
+          doc.setTextColor(0, 0, 0); // Blue color for header
           doc.text(' RÉPUBLIQUE DU NIGER | I.P.A.S - Institut Privé des Agents de Santé', 105, 8, null, null, 'center');
           doc.text(' MINISTRE DE L ENSEIGNEMENT TECHNIQUE ET PROFESSIONNEL  | ', 105, 12, null, null, 'center');
           doc.text(' Agrée par L Etat du Niger Arrêté N° 000193/MET/FP/DGET/P/DETPP/DL du 11/11/22 ', 105, 16, null, null, 'center');
           
           doc.setFontSize(16);
-          doc.setTextColor(0, 102, 204); // Set color to navy blue
+          doc.setTextColor(0, 0, 0); // Set color to navy blue
           doc.text('FICHE DE DEMANDE D INSCRIPTION  I.P.A.S', 105, 25, null, null, 'center');
           
           doc.setFontSize(10);
           
           // Function to add a field with colored title and value
           function addField(title, value, y) {
-            doc.setTextColor(0, 102, 204); // Blue color for title
+            doc.setTextColor(0, 0, 0); // Blue color for title
             doc.text(`${title}:`, 20, y);
-            doc.setTextColor(0, 0, 255); // Blue color for value
+            doc.setTextColor(0, 0, 0); // Blue color for value
             doc.text(value, 60, y);
           }
           
@@ -364,7 +364,7 @@
           
           // I) Identification du candidat
           doc.setFontSize(12);
-          doc.setTextColor(0, 102, 204);
+          doc.setTextColor(0, 0, 0);
           doc.text('I) Identification du candidat', 20, y);
           y += lineSpacing;
           doc.setFontSize(10);
@@ -379,7 +379,7 @@
           // II) Choix de la filière
           y += lineSpacing;
           doc.setFontSize(12);
-          doc.setTextColor(0, 102, 204);
+          doc.setTextColor(0, 0, 0);
           doc.text('II) Choix de la filière', 20, y);
           y += lineSpacing;
           doc.setFontSize(10);
@@ -389,7 +389,7 @@
           // III) Prise en charge
           y += lineSpacing;
           doc.setFontSize(12);
-          doc.setTextColor(0, 102, 204);
+          doc.setTextColor(0, 0, 0);
           doc.text('III) Prise en charge', 20, y);
           y += lineSpacing;
           doc.setFontSize(10);
