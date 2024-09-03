@@ -1,0 +1,475 @@
+<html><head><base href="https://generateur-quittance.fr">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>fiche d'inscription  I.P.A.S</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<style>
+  :root {
+    --primary-color: #00ffff;
+    --secondary-color: #ff00ff;
+    --background-color: #111;
+    --text-color: #fff;
+    --input-background: rgba(255, 255, 255, 0.1);
+    --input-border: 1px solid var(--primary-color);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 20%),
+      radial-gradient(circle at 90% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 20%);
+    background-attachment: fixed;
+  }
+
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+  }
+
+  h1, h2 {
+    color: var(--primary-color);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px var(--primary-color);
+  }
+
+  .logo {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 150px;
+    height: auto;
+  }
+
+  h2 {
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+  }
+
+  form {
+    display: grid;
+    gap: 15px;
+  }
+
+  label {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    display: block;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 10px;
+    border: var(--input-border);
+    border-radius: 8px;
+    background-color: var(--input-background);
+    color: var(--text-color);
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  input:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 10px var(--primary-color);
+  }
+
+  button {
+    background-image: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: var(--background-color);
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--secondary-color);
+  }
+
+  #message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    display: none;
+  }
+
+  .success {
+    background-color: rgba(76, 175, 80, 0.8);
+    color: white;
+  }
+
+  .error {
+    background-color: rgba(244, 67, 54, 0.8);
+    color: white;
+  }
+
+  @media (min-width: 600px) {
+    .container {
+      padding: 30px;
+      max-width: 800px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+    }
+
+    h2 {
+      font-size: 1.8em;
+    }
+
+    form {
+      gap: 20px;
+    }
+
+    input, select, button {
+      font-size: 16px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    body {
+      padding: 40px;
+    }
+
+    .container {
+      padding: 40px;
+    }
+
+    h1 {
+      font-size: 3em;
+    }
+
+    h2 {
+      font-size: 2em;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>FICHE DE DEMANDE D'INSCRIPTION Á I.P.A.S</h1>
+	<img src="https://s4.aconvert.com/convert/p3r68-cdx67/atnd4-85wms.jpg" alt="" class="logo">
+    <form id="quittanceForm">
+      <h2>I) Identification du candidat</h2>
+      
+      <label for="nom">Nom:</label>
+      <input type="text" id="nom" required>
+      
+      <label for="prenom">Prénom:</label>
+      <input type="text" id="prenom" required>
+      
+      <label for="dateNaissance">Date de naissance:</label>
+      <input type="date" id="dateNaissance" required>
+      
+      <label for="lieuNaissance">Lieu de naissance:</label>
+      <input type="text" id="lieuNaissance" required>
+      
+      <label for="nationalite">Nationalité:</label>
+      <input type="text" id="nationalite" required>
+      
+      <label for="sexe">Sexe:</label>
+      <select id="sexe" required>
+        <option value="M">Masculin</option>
+        <option value="F">Féminin</option>
+      </select>
+      
+      <label for="adresse">Adresse:</label>
+      <input type="text" id="adresse" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+      
+      <label for="telephone">Numéro de téléphone:</label>
+      <input type="tel" id="telephone" required>
+      
+      <label for="telephoneParent">Numéro de téléphone parent:</label>
+      <input type="tel" id="telephoneParent" required>
+      
+      <label for="diplome">Diplôme:</label>
+      <select id="diplome" required>
+        <option value="">Sélectionnez un diplôme</option>
+        <option value="ASB">ASB</option>
+        <option value="BEPC">BEPC</option>
+        <option value="BAC">BAC</option>
+      </select>
+      
+      <label for="institution">Institution:</label>
+      <input type="text" id="institution" required>
+      
+      <label for="anneeObtention">Année d'obtention du diplôme:</label>
+      <input type="number" id="anneeObtention" min="1900" max="2099" step="1" required>
+      
+      <label for="fonctionActuelle">Fonction actuelle:</label>
+      <input type="text" id="fonctionActuelle" required>
+      
+      <h2>II) Choix de la filière</h2>
+      <label for="filiere">Filière:</label>
+      <select id="filiere" required>
+        <option value="">Sélectionnez une filière</option>
+        <option value="ASB">Agent de santé de base (ASB)</option>
+        <option value="DM">Délégué médical</option>
+        <option value="SM">Secrétaire médicale</option>
+        <option value="LSI">Licence en science infirmière</option>
+        <option value="LSO">Licence en science obstétricale</option>
+        <option value="LBM">Licence en biologie médicale</option>
+        <option value="VP">Vendeur en pharmacie</option>
+        <option value="SEC">Secouriste</option>
+      </select>
+      
+      <h2>III) Prise en charge</h2>
+      <p>Les frais de formation seront pris en charge par :</p>
+      <label for="priseEnCharge">Choix de prise en charge:</label>
+      <select id="priseEnCharge" required>
+        <option value="">Sélectionnez une option</option>
+        <option value="parent">Parent</option>
+        <option value="moi-meme">Moi-même</option>
+        <option value="organisme">Organisme</option>
+        <option value="societe">Société</option>
+      </select>
+      
+      <label for="priseEnChargeDetails">Détails de la prise en charge:</label>
+      <input type="text" id="priseEnChargeDetails" required>
+      
+      <h3>NB: Préciser nom, prénom et adresse complète</h3>
+      <label for="nomPriseEnCharge">Nom:</label>
+      <input type="text" id="nomPriseEnCharge" required>
+      
+      <label for="prenomPriseEnCharge">Prénom:</label>
+      <input type="text" id="prenomPriseEnCharge" required>
+      
+      <label for="adressePriseEnCharge">Adresse complète:</label>
+      <input type="text" id="adressePriseEnCharge" required>
+      
+      <label for="autrePrecision">Autre (à préciser):</label>
+      <input type="text" id="autrePrecision">
+      
+      <label for="photo">Photo de l'étudiant:</label>
+      <input type="file" id="photo" accept="image/*" required>
+      
+      <button type="submit">Générer et télécharger la quittance</button>
+    </form>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      window.jsPDF = window.jspdf.jsPDF;
+    
+      document.getElementById('quittanceForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Gather form data
+        const formData = {
+          nom: document.getElementById('nom').value,
+          prenom: document.getElementById('prenom').value,
+          dateNaissance: document.getElementById('dateNaissance').value,
+          lieuNaissance: document.getElementById('lieuNaissance').value,
+          nationalite: document.getElementById('nationalite').value,
+          sexe: document.getElementById('sexe').value,
+          adresse: document.getElementById('adresse').value,
+          email: document.getElementById('email').value,
+          telephone: document.getElementById('telephone').value,
+          telephoneParent: document.getElementById('telephoneParent').value,
+          diplome: document.getElementById('diplome').value,
+          institution: document.getElementById('institution').value,
+          anneeObtention: document.getElementById('anneeObtention').value,
+          fonctionActuelle: document.getElementById('fonctionActuelle').value,
+          filiere: document.getElementById('filiere').options[document.getElementById('filiere').selectedIndex].text,
+          priseEnCharge: document.getElementById('priseEnCharge').value,
+          priseEnChargeDetails: document.getElementById('priseEnChargeDetails').value,
+          nomPriseEnCharge: document.getElementById('nomPriseEnCharge').value,
+          prenomPriseEnCharge: document.getElementById('prenomPriseEnCharge').value,
+          adressePriseEnCharge: document.getElementById('adressePriseEnCharge').value,
+          autrePrecision: document.getElementById('autrePrecision').value
+        };
+        
+        const photoFile = document.getElementById('photo').files[0];
+        const logoUrl = document.querySelector('.logo').src;
+        
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const photoDataUrl = event.target.result;
+          
+          const doc = new jsPDF();
+          
+          // Set font to Arial
+          doc.setFont("arial");
+          
+          // Add logo
+          doc.addImage(logoUrl, 'JPEG', 10, 5, 10, 10);
+          doc.addImage(logoUrl, 'JPEG', 190, 5, 10, 10);
+          
+          // Add header
+          doc.setFontSize(6);
+          doc.setTextColor(0, 0, 0); // Blue color for header
+          doc.text('RÉPUBLIQUE DU NIGER | MINISTRE DE L ENSEIGNEMENT TECHNIQUE ET PROFESSIONNEL', 105, 8, null, null, 'center');
+          doc.text('MINISTRE DE LA SANTÉ PUBLIQUE DE LA POPULATION ET DES AFFAIRES SOCIALES | ', 105, 12, null, null, 'center');
+          doc.text('INSTITUT PRIVÉ DES AGENTS DE SANTÉ | Rigueur-Compétance-Succès', 105, 16, null, null, 'center');
+          doc.text('Agrée par L Etat du Niger Arrêté N° 000193/MET/FP/DGET/P/DETPP/DL du 11/11/22' ,105 ,20, null, null, 'center');
+          doc.setFontSize(16);
+          doc.setTextColor(0, 0, 0); // Set color to navy blue
+          doc.text('Quittance de Préinscription I.P.A.S', 105, 25, null, null, 'center');
+          
+          doc.setFontSize(10);
+          
+          // Function to add a field with colored title and value
+          function addField(title, value, y) {
+            doc.setTextColor(0, 0, 0); // Blue color for title
+            doc.text(`${title}:`, 20, y);
+            doc.setTextColor(0, 0, 0); // Blue color for value
+            doc.text(value, 60, y);
+          }
+          
+          // Add fields with reduced line spacing
+          let y = 35;
+          const lineSpacing = 7;
+          
+          // I) Identification du candidat
+          doc.setFontSize(12);
+          doc.setTextColor(0, 0, 0);
+          doc.text('I) Identification du candidat', 20, y);
+          y += lineSpacing;
+          doc.setFontSize(10);
+
+          const section1Fields = ['nom', 'prenom', 'dateNaissance', 'lieuNaissance', 'nationalite', 'sexe', 'adresse', 'email', 'telephone', 'telephoneParent', 'diplome', 'institution', 'anneeObtention', 'fonctionActuelle'];
+          
+          for (const field of section1Fields) {
+            addField(field.charAt(0).toUpperCase() + field.slice(1), formData[field], y);
+            y += lineSpacing;
+          }
+
+          // II) Choix de la filière
+          y += lineSpacing;
+          doc.setFontSize(12);
+          doc.setTextColor(0, 0, 0);
+          doc.text('II) Choix de la filière', 20, y);
+          y += lineSpacing;
+          doc.setFontSize(10);
+          addField('Filière', formData.filiere, y);
+          y += lineSpacing;
+
+          // III) Prise en charge
+          y += lineSpacing;
+          doc.setFontSize(12);
+          doc.setTextColor(0, 0, 0);
+          doc.text('III) Prise en charge', 20, y);
+          y += lineSpacing;
+          doc.setFontSize(10);
+          doc.text('Les frais de formation seront pris en charge par :', 20, y);
+          y += lineSpacing;
+          addField('Choix de prise en charge', formData.priseEnCharge, y);
+          y += lineSpacing;
+          addField('Détails de la prise en charge', formData.priseEnChargeDetails, y);
+          y += lineSpacing;
+          addField('Nom', formData.nomPriseEnCharge, y);
+          y += lineSpacing;
+          addField('Prénom', formData.prenomPriseEnCharge, y);
+          y += lineSpacing;
+          addField('Adresse complète', formData.adressePriseEnCharge, y);
+          y += lineSpacing;
+          if (formData.autrePrecision) {
+            addField('Autre précision', formData.autrePrecision, y);
+            y += lineSpacing;
+          }
+          
+          doc.setTextColor(0, 0, 0); // Set color back to black
+          doc.setFontSize(10);
+          doc.text('Avis de la commision d examen des dossiers  Test : Oui_______________ |  Non________________', 20, y);
+          y += lineSpacing;
+          doc.text(`Date d'émission: ${new Date().toLocaleDateString()}`, 20, y);
+          
+          // Add signature lines
+          y += lineSpacing * 2;
+          doc.setDrawColor(0);
+          doc.line(20, y, 90, y); // Student signature line
+          doc.line(120, y, 190, y); // Parent signature line
+          
+          doc.setFontSize(8);
+          doc.setTextColor(0, 0, 0); // Blue color for signature text
+          y += 5;
+          doc.text('Signature de l\'étudiant', 20, y);
+          doc.text('Signature du parent', 120, y);
+          
+          // Generate QR Code
+          const qrData = Object.entries(formData).map(([key, value]) => `${key}: ${value}`).join('\n');
+          const qr = qrcode(0, 'M');
+          qr.addData(qrData);
+          qr.make();
+          const qrImage = qr.createDataURL(4);
+          
+          // Add student photo
+          doc.addImage(photoDataUrl, 'JPEG', 20, y + 5, 25, 25);
+          doc.setTextColor(0, 0, 0); // Blue color for photo text
+          doc.setFontSize(6);
+          doc.text('Photo de l\'étudiant', 32.5, y + 35, null, null, 'center');
+          
+          // Add QR Code to PDF
+          doc.addImage(qrImage, 'PNG', 165, y + 5, 25, 25);
+          doc.setTextColor(0, 0, 0); // Blue color for QR code text
+          doc.setFontSize(6);
+          doc.text('Scannez pour vérifier', 177.5, y + 35, null, null, 'center');
+          
+          // Add footer
+          doc.setFontSize(6);
+          doc.setTextColor(0, 0, 0); // Blue color for footer
+          doc.text('I.P.A.S - Institut Privé des Agents de Santé', 105, 285, null, null, 'center');
+          doc.text('Tél: +227 96 04 71 35 | Email: directiongeneraleipas@gmail.com', 105, 289, null, null, 'center');
+          doc.text('Site web: ipas4.odoo.com | Niamey, Niger - Quartier Aéroport', 105, 293, null, null, 'center');
+          
+          // Save and download PDF
+          doc.save('quittance_preinscription_IPAS.pdf');
+          
+          showMessage('Quittance générée et téléchargée avec succès!', 'success');
+        };
+        
+        reader.readAsDataURL(photoFile);
+      });
+      
+      function showMessage(text, type) {
+        const messageDiv = document.getElementById('message');
+        messageDiv.textContent = text;
+        messageDiv.className = type;
+        messageDiv.style.display = 'block';
+        setTimeout(() => {
+          messageDiv.style.display = 'none';
+        }, 5000);
+      }
+    });
+  </script>
+</body>
+</html>
